@@ -50,7 +50,7 @@ docker-compose up -d
 
 `/chall <name:str>` : Affiche tous les chall qui comporte "name" dans leur nom
 
-`search_profile <pseudo:str>` : Recherche un utilisateur sur ROOT ME
+`/search_profile <pseudo:str>` : Recherche un utilisateur sur ROOT ME
 
 `/help` : Affiche l'aide
 
