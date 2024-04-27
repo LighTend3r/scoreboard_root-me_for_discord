@@ -25,7 +25,9 @@ GUILD_ID
 ```
 
 Le `DISCORD_TOKEN` est le token de votre bot discord, vous pouvez le récupérer sur le [portail développeur Discord](https://discord.com/developers/applications)
+
 Le `ROOT_ME_API_KEY` est la clé d'API de VOTRE compte ROOT ME, vous pouvez la récupérer sur [ROOT ME](https://www.root-me.org/?page=preferences)
+
 Le `GUILD_ID` est l'identifiant de votre serveur Discord, vous pouvez le récupérer en activant le mode développeur sur Discord et en cliquant droit sur votre serveur
 
 4. lancer le docker-compose
