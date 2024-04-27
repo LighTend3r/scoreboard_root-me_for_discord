@@ -14,7 +14,7 @@ def LINE():
 
 def FILE():
     caller = getframeinfo(stack()[2][0])
-    return re.findall("bot.*", caller.filename)[0]
+    return caller.filename
 
 
 def FUNCTION():
