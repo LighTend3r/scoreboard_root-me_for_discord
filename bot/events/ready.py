@@ -1,5 +1,6 @@
 from discord.ext import commands
 from utils.config import GUILD_ID
+from utils.logging import info
 
 class ReadyEvent(commands.Cog):
     def __init__(self, client):
@@ -8,12 +9,12 @@ class ReadyEvent(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        print('Le bot est connecté et prêt!')
+        info('Le bot est connecté et prêt!')
 
         await self.client.tree.sync(guild=self.client.get_guild(GUILD_ID))
         await self.client.tree.sync()
 
-        
+
 
 
 async def setup(client):

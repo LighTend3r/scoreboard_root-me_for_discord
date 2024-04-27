@@ -4,6 +4,7 @@ from utils.db import Dabatase
 from utils.api_rm import get_user_by_id, get_challenge_by_id
 import time
 import traceback
+from utils.logging import info
 
 class UpdateProfile(commands.Cog):
     def __init__(self, client: commands.Bot) -> None:
@@ -14,7 +15,7 @@ class UpdateProfile(commands.Cog):
     @tasks.loop(hours=1)
     async def update_profile(self) -> None:
         try:
-            print("Running need update tasks")
+            info("Running need update tasks")
 
             cursor = Dabatase().get_cursor()
 
@@ -25,7 +26,7 @@ class UpdateProfile(commands.Cog):
             for user in users:
 
                 user_rm = get_user_by_id(user[1])
-                print(f"[UPDATE] Mise à jour du profil de {user_rm['nom']}")
+                info(f"[UPDATE] Mise à jour du profil de {user_rm['nom']}")
 
                 if not user_rm:
                     continue
@@ -39,7 +40,7 @@ class UpdateProfile(commands.Cog):
                     challenge = r.fetchone()
 
                     if challenge[0] == 0:
-                        print(f"[UPDATE] Ajout du challenge {chall['titre']} pour {user_rm['nom']}")
+                        info(f"[UPDATE] Ajout du challenge {chall['titre']} pour {user_rm['nom']}")
                         r = cursor.execute("SELECT * FROM solve WHERE id_challenge=?", (chall["id_challenge"],))
                         challenge_alread_here = r.fetchone()
 
@@ -74,12 +75,12 @@ class UpdateProfile(commands.Cog):
                             )
 
                 cursor.connection.commit()
-        except Exception:
-            print(traceback.format_exc())
+        except Exception as e:
+            logging.error(e)
 
     @update_profile.error
     async def update_profile_error(self, error) -> None:
-        print(traceback.format_exc())
+        logging.error("An error occured")
 
     @update_profile.before_loop
     async def wait_for_bot_ready(self) -> None:

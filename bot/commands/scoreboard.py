@@ -5,8 +5,8 @@ from utils.config import GUILD_ID
 from utils.api_rm import get_user_by_id
 from utils.db import Dabatase
 from discord import Embed
-import traceback
 from datetime import datetime, timedelta
+from utils.logging import error as logging_error
 
 def place_to_str(place):
     if place == 1:
@@ -66,7 +66,7 @@ class ScoreboardCommand(commands.Cog):
         else:
             first_date = today - timedelta(days=period)
             first_date = first_date.isoformat()
-            r = cursor.execute("SELECT u.id_auteur,u.nom,SUM(s.score) as score FROM user_rm u JOIN solve s ON u.id_auteur=s.id_auteur WHERE s.timestamp > ? GROUP BY u.id_auteur,u.nom ORDER BY score DESC", (first_date,))
+            r = cursor.execute("SELECT u.id_auteur,u.nom,SUM(s.score) as score FROM user_rm u JOIN solve s ON u.id_auteur=s.id_auteur HAVING s.timestamp > ? GROUP BY u.id_auteur,u.nom ORDER BY score DESC", (first_date,))
 
             users = r.fetchall()
 
@@ -86,8 +86,8 @@ class ScoreboardCommand(commands.Cog):
 
     @slash_scoreboard.error
     async def slash_error(self, interaction: Interaction, error):
-        print(traceback.format_exc())
         await interaction.followup.send("An error occured")
+        logging_error(error)
 
 async def setup(client):
     await client.add_cog(ScoreboardCommand(client))

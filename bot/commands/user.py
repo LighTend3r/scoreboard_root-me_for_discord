@@ -9,6 +9,7 @@ from discord import Embed
 from discord.app_commands import Choice
 from typing import List
 import traceback
+from utils.logging import error as logging_error
 
 
 class UserCommand(commands.Cog):
@@ -191,7 +192,7 @@ class UserCommand(commands.Cog):
             ]
 
         except Exception as e:
-            print(e)
+            logging.error(e)
             return []
 
 
@@ -199,8 +200,8 @@ class UserCommand(commands.Cog):
     @slash_remove_user.error
     @slash_profile.error
     async def slash_add_user_error(self, interaction: Interaction, error):
-        print(traceback.format_exc())
         await interaction.followup.send("An error occured")
+        logging_error(error)
 
 async def setup(client):
     await client.add_cog(UserCommand(client))

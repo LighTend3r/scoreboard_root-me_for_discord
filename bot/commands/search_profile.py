@@ -3,7 +3,7 @@ from discord.app_commands import command, guilds
 from discord.ext import commands
 from utils.config import GUILD_ID
 from utils.api_rm import get_all_users_by_name
-import traceback
+from utils.logging import error as logging_error
 
 
 class SearchProfileCommand(commands.Cog):
@@ -34,8 +34,8 @@ class SearchProfileCommand(commands.Cog):
 
     @slash_search_profile.error
     async def slash_add_user_error(self, interaction: Interaction, error):
-        print(traceback.format_exc())
         await interaction.followup.send("An error occured")
+        logging_error(error)
 
 async def setup(client):
     await client.add_cog(SearchProfileCommand(client))

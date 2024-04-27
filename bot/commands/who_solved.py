@@ -6,6 +6,7 @@ from utils.db import Dabatase
 from discord import Embed
 import traceback
 from utils.api_rm import get_all_chall_by_name
+from utils.logging import error as logging_error
 
 class WhoSolvedCommand(commands.Cog):
     def __init__(self, client):
@@ -65,8 +66,8 @@ class WhoSolvedCommand(commands.Cog):
 
     @slash_who_solved.error
     async def slash_error(self, interaction: Interaction, error):
-        print(traceback.format_exc())
         await interaction.followup.send("An error occured")
+        logging_error(error)
 
 async def setup(client):
     await client.add_cog(WhoSolvedCommand(client))

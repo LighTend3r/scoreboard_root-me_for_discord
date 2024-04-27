@@ -4,7 +4,7 @@ from discord.ext import commands
 from utils.config import GUILD_ID
 from utils.api_rm import get_all_chall_by_name
 from discord import Embed
-import traceback
+from utils.logging import error as logging_error
 
 dict_category = {
     "189": "App-Script",
@@ -33,8 +33,6 @@ class ChallCommand(commands.Cog):
 
         all_challenges = get_all_chall_by_name(name)
 
-        print(all_challenges)
-        print(all_challenges.keys())
 
         message_to_display = ""
         for chall in list(all_challenges.keys())[:10]:
@@ -46,8 +44,8 @@ class ChallCommand(commands.Cog):
 
     @slash_chall.error
     async def slash_error(self, interaction: Interaction, error):
-        print(traceback.format_exc())
         await interaction.followup.send("An error occured")
+        logging_error(error)
 
 async def setup(client):
     await client.add_cog(ChallCommand(client))
