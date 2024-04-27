@@ -104,6 +104,8 @@ class UserCommand(commands.Cog):
             return
 
         cursor.execute("DELETE FROM user_rm WHERE id_auteur=?", (rm_id,))
+        cursor.execute("DELETE FROM solve WHERE id_auteur=?", (rm_id,))
+
         cursor.connection.commit()
 
         await interaction.followup.send(f"User {nom[0]} removed")
