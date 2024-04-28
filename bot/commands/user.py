@@ -28,7 +28,7 @@ class UserCommand(commands.Cog):
             return
 
         if pseudo != "":
-            all_user_rm = get_all_users_by_name(pseudo)
+            all_user_rm = await get_all_users_by_name(pseudo)
 
             if not all_user_rm or len(all_user_rm) == 0:
                 await interaction.followup.send("User not found")
@@ -54,7 +54,7 @@ class UserCommand(commands.Cog):
             return
 
 
-        user = get_user_by_id(rm_id)
+        user = await get_user_by_id(rm_id)
         if not user:
             await interaction.followup.send("User not found")
             return
@@ -142,7 +142,7 @@ class UserCommand(commands.Cog):
             await interaction.followup.send("User not found")
             return
 
-        user_rm = get_user_by_id(rm_id)
+        user_rm = await get_user_by_id(rm_id)
 
         if not user:
             await interaction.followup.send("User not found")

@@ -25,7 +25,7 @@ class UpdateProfile(commands.Cog):
 
             for user in users:
 
-                user_rm = get_user_by_id(user[1])
+                user_rm = await get_user_by_id(user[1])
                 info(f"[UPDATE] Mise à jour du profil de {user_rm['nom']}")
 
                 if not user_rm:
@@ -59,7 +59,7 @@ class UpdateProfile(commands.Cog):
                                 )
                             )
                         else:
-                            challenge_rm = get_challenge_by_id(chall["id_challenge"])
+                            challenge_rm = await get_challenge_by_id(chall["id_challenge"])
                             time.sleep(0.3)
                             cursor.execute("INSERT INTO solve (id_auteur, id_challenge, titre, rubrique, score, id_rubrique, url_challenge, difficulte, timestamp) VALUES (?,?,?,?,?,?,?,?,?)", (
                                 user[1],

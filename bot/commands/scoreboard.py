@@ -45,7 +45,7 @@ class ScoreboardCommand(commands.Cog):
             r = cursor.execute("SELECT * FROM user_rm")
             users = r.fetchall()
             for user in users:
-                user_rm = get_user_by_id(user[1])
+                user_rm = await get_user_by_id(user[1])
                 if not user_rm:
                     continue
                 cursor.execute("UPDATE user_rm SET score=?, rang=?, position=? WHERE id_auteur=?", (user_rm["score"], user_rm["rang"], user_rm["position"], user[1]))

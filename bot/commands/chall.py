@@ -31,7 +31,7 @@ class ChallCommand(commands.Cog):
 
         await interaction.response.defer()
 
-        all_challenges = get_all_chall_by_name(name)
+        all_challenges = await get_all_chall_by_name(name)
 
 
         message_to_display = ""

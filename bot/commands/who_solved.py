@@ -24,7 +24,7 @@ class WhoSolvedCommand(commands.Cog):
             return
 
         if name_chall != "":
-            all_challenges_rm = get_all_chall_by_name(name_chall)
+            all_challenges_rm = await get_all_chall_by_name(name_chall)
 
             if not all_challenges_rm or len(all_challenges_rm) == 0:
                 await interaction.followup.send("Challenge not found")

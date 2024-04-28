@@ -17,7 +17,7 @@ class SearchProfileCommand(commands.Cog):
 
         await interaction.response.defer()
 
-        all_users_rm = get_all_users_by_name(pseudo)
+        all_users_rm = await get_all_users_by_name(pseudo)
 
         if not all_users_rm:
             await interaction.followup.send("User not found")
