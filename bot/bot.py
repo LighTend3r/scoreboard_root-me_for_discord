@@ -26,7 +26,6 @@ init_db()
 
 
 
-
 async def main():
     async with bot:
 
