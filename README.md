@@ -20,7 +20,7 @@ touch .env
 
 ```env
 DISCORD_TOKEN
-ROOT_ME_API_KEY
+RM_API_KEY
 GUILD_ID
 ```
 
